@@ -5,6 +5,8 @@ import com.raag.movie_service.model.Movie;
 import com.raag.movie_service.repository.MovieRepository;
 import com.raag.movie_service.response.Movies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +17,17 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public Movies getMovies() {
-        Movies movies = new Movies();
-        List<Movie> movieList =  movieRepository.findAll();
-        movies.setMovies(movieList);
-        return movies;
+    public Page<Movie> getMovies(String title, String genre, Double minRating, int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size);
+
+        if (title != null && !title.isEmpty()) {
+            return movieRepository.findByTitleContainingIgnoreCase(title, pageable);
+        } else if (genre != null && minRating != null) {
+            return movieRepository.findByGenreContainingIgnoreCaseAndRatingGreaterThanEqual(
+                    genre, minRating, pageable);
+        } else {
+            return movieRepository.findAll(pageable);
+        }
     }
 
     public Movie addMovie(Movie movie) {
