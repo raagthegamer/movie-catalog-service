@@ -1,7 +1,6 @@
 package com.raag.movie_service.controller;
 
 import com.raag.movie_service.model.Movie;
-import com.raag.movie_service.response.Movies;
 import com.raag.movie_service.service.MovieService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

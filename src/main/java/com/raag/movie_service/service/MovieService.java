@@ -3,13 +3,10 @@ package com.raag.movie_service.service;
 import com.raag.movie_service.exception.MovieNotFoundException;
 import com.raag.movie_service.model.Movie;
 import com.raag.movie_service.repository.MovieRepository;
-import com.raag.movie_service.response.Movies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MovieService {
